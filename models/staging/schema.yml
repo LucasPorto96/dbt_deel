@@ -1,0 +1,33 @@
+version: 2
+
+models:
+    - name: stg_global_payment__acceptance
+      description: "A starter dbt model"
+      columns:
+        - name: external_ref
+          description: The card expiry year. Format. 4 digits. For example. 2020
+        - name: status
+          description: .
+        - name: ref
+          description: .
+        - name: date_time
+          description: The timestamp of the transaction.
+        - name: state
+          description: The binary state of the transaction. For example. Accepted or Declined. 
+          tests:
+            - accepted_values:
+                values:
+                  - "ACCEPTED"
+                  - "DECLINED"
+        - name: cvv_provided
+          description: .
+        - name: amount
+          description: The amount that has been charged from the card. 
+        - name: country
+          description: The two-character ISO country code of the card.
+        - name: currency
+          description: The three-character ISO currency code.
+        - name: rates
+          description: The exchange rate used. Funds are settled to you in USD. 
+        - name: amount_in_dollars
+          description: The original amount times respective rate.
