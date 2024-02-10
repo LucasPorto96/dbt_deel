@@ -6,4 +6,5 @@ sources:
     schema: public
     tables:
       - name: acceptance
+
       - name: chargeback
