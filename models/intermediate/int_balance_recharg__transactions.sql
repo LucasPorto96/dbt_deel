@@ -17,12 +17,10 @@ select
     acceptance.currency,
     acceptance.amount_in_dollars,
     chargeback.chargeback
-from
-    {{ ref("stg_globepay__acceptance") }} acceptance,
-    {{ ref("stg_globepay__chargeback") }} chargeback
+from {{ ref("stg_globepay__acceptance") }} acceptance
 
-where
-    acceptance.external_ref = chargeback.external_ref
-    {% if is_incremental() %}
-        and date_time > (select max(date_time) from {{ this }})
-    {% endif %}
+left join {{ ref("stg_globepay__chargeback") }} chargeback using (external_ref)
+
+{% if is_incremental() %}
+    where date_time > (select max(date_time) from {{ this }})
+{% endif %}
