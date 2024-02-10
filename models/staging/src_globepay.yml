@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: global_payments
+    description: It's the set of tables from global payments api
+    schema: public
+    tables:
+      - name: acceptance
+      - name: chargeback
