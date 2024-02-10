@@ -1,11 +1,13 @@
 version: 2
 
 models:
-    - name: stg_global_payment__acceptance
+    - name: stg_globepay__acceptance
       description: "A starter dbt model"
       columns:
         - name: external_ref
           description: The card expiry year. Format. 4 digits. For example. 2020
+          tests:
+            - unique
         - name: status
           description: .
         - name: ref
@@ -31,3 +33,15 @@ models:
           description: The exchange rate used. Funds are settled to you in USD. 
         - name: amount_in_dollars
           description: The original amount times respective rate.
+
+    - name: stg_globepay__chargeback
+      description: Chargeback informations abount transactions
+      columns:
+        - name: external_ref
+          description: The card expiry year. Format. 4 digits. For example. 2020
+          tests:
+            - unique
+        - name: status
+          description: .
+        - name: chargeback
+          description: The transactions was chargedback
